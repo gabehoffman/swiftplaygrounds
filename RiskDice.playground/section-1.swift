@@ -1,4 +1,4 @@
-,// Playground - noun: a place where people can play
+// Playground - noun: a place where people can play
 
 import Cocoa
 
@@ -14,10 +14,10 @@ class LinearCongruentialGenerator: RandomNumberGenerator {
     let c = 29573.0
     func random(sides: Int) -> Int {
         seedNumber = Int (arc4random_uniform(UInt32(lastRandom)))
-        var newRandom = (lastRandom * a + c) % m) / m
-        lastRandom =  ( newRandom ) * Double(sides)
-        println("Random dice roll is \(lastRandom)")
-        return Int(lastRandom)
+        lastRandom = ((lastRandom * a + c) % m)
+        var newRandom = (lastRandom / m) * Double(sides) + 1
+        //println("Generated dice roll is \(newRandom)")
+        return Int(newRandom)
     }
 }
 
@@ -27,7 +27,7 @@ class StandardGenerator: RandomNumberGenerator {
         var fromNumber: Int = 1;
         var toNumber: Int = 6;
         var randomNumber: Int = Int(arc4random_uniform(UInt32(sides)))+1
-        println("Random dice roll is \(randomNumber)")
+        //println("Generated dice roll is \(randomNumber)")
         return (randomNumber)
     }
 }
@@ -88,5 +88,5 @@ func testRandomness(turns: Int, sides: Int, generator: RandomNumberGenerator) {
     println("\nOut of \(turns) turns \n it was a 1 \(percentOnes)% \n it was a 2 \(percentTwos)% \n it was a 3 \(percentThrees)% \n it was a 4 \(percentFours)% \n it was a 5 \(percentFives)% \n it was a 6 \(percentSixes)% ")
 }
 
-testRandomness(50, 6, LinearCongruentialGenerator())
-testRandomness(50, 6, StandardGenerator())
+//testRandomness(500, 6, LinearCongruentialGenerator())
+//testRandomness(500, 6, StandardGenerator())
